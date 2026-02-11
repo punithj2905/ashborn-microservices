@@ -1,0 +1,15 @@
+spring:
+    datasource:
+        url: jdbc:mysql://localhost:3306/ashborn_customer
+        username: shadow123
+        password: shadow123
+
+    jpa:
+        hibernate:
+        ddl-auto: update
+        show-sql: true
+
+    application:
+        name: customer-service
+server:
+    port: 8090
