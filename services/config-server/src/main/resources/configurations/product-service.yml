@@ -1,0 +1,28 @@
+spring:
+    datasource:
+        url: jdbc:postgresql://localhost:5432/ashborn_db
+        username: shadow
+        password: shadow
+        driver-class-name: org.postgresql.Driver
+    jpa:
+        hibernate:
+            ddl-auto: validate
+        database: postgresql
+        database-platform: org.hibernate.dialect.PostgreSQLDialect
+        properties:
+             hibernate:
+                jdbc:
+                    time_zone: UTC
+    flyway:
+        base-line-on-migrate: true
+        enabled: true
+        baseline-description:
+        baseline-version: 0
+        user: ${spring.datasource.username}
+        password: ${spring.datasource.password}
+    jackson:
+        time-zone: Asia/Kolkata
+    test-value: hello-debug-world
+
+server:
+    port: 8050
