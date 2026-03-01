@@ -30,11 +30,11 @@ public class CustomerService {
                 repository.save(customer);
     }
     private void mergerCustomer(Customer customer, CustomerRequest request) {
-        if(StringUtils.isNotBlank(request.firstname())){
-            customer.setFirstname(request.firstname());
+        if(StringUtils.isNotBlank(request.firstName())){
+            customer.setFirstName(request.firstName());
         }
-        if(StringUtils.isNotBlank(request.lastname())){
-            customer.setLastname(request.lastname());
+        if(StringUtils.isNotBlank(request.lastName())){
+            customer.setLastName(request.lastName());
         }
         if(StringUtils.isNotBlank(request.email())){
             customer.setEmail(request.email());
@@ -50,14 +50,14 @@ public class CustomerService {
                .map(mapper::fromCustomer)
                .collect(Collectors.toList());
     }
-    public Boolean existById(Long customerId) {
+    public Boolean existsById(Long customerId) {
          return repository.findById(customerId)
                           .isPresent();
     }
     public CustomerResponse findById(Long customerId) {
        return repository.findById(customerId)
                         .map(mapper::fromCustomer)
-                        .orElseThrow(()->new CustomerNotFoundException(format("No customer is found with teh provided Id::%s",customerId)));
+                        .orElseThrow(()->new CustomerNotFoundException(format("No customer is found with the provided Id::%s",customerId)));
                     }
     public void deleteCustomer(Long customerId) {
         repository.deleteById(customerId);

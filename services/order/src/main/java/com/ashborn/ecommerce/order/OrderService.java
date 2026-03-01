@@ -11,6 +11,8 @@ import com.ashborn.ecommerce.kafka.OrderConfirmation;
 import com.ashborn.ecommerce.kafka.OrderProducer;
 import com.ashborn.ecommerce.orderline.OrderLineRequest;
 import com.ashborn.ecommerce.orderline.OrderLineService;
+import com.ashborn.ecommerce.payment.PaymentClient;
+import com.ashborn.ecommerce.payment.PaymentRequest;
 import com.ashborn.ecommerce.product.ProductClient;
 import com.ashborn.ecommerce.product.PurchaseRequest;
 
@@ -20,12 +22,13 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class OrderService {
      
-   private final OrderRespository repository;
+   private final OrderRepository repository;
     private final CustomerClient customerClient;
     private final ProductClient productClient;
     private final OrderMapper mapper;
     private final OrderLineService orderLineService;
     private final OrderProducer orderProducer;
+    private final PaymentClient paymentClient;
     public Integer createOrder(OrderRequest request) {
     //check the customer-->openfeign
     var customer = this.customerClient.findCustomerById(request.customerId())
@@ -33,7 +36,7 @@ public class OrderService {
      
 
 
-    //purchase the products --> product-miroservice(RestTemplate)
+    //purchase the products --> product-microservice(RestTemplate)
     var purchasedProducts= this.productClient.purchaseProducts(request.products());
 
     //persist order
@@ -51,7 +54,17 @@ public class OrderService {
         );
     }
 
-    // TODO start payment process
+    //start payment process
+    var paymentRequest= new PaymentRequest(
+        request.amount(),
+        request.paymentMethod(),
+        order.getId(),
+        order.getReference(),
+        customer
+
+    );
+    paymentClient.requestOrderPayment(paymentRequest);
+     
 
 
     //send the order confirmation ---> notification-ms (kafka)

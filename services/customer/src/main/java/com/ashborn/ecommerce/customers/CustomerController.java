@@ -27,7 +27,7 @@ public class CustomerController {
     private final CustomerService service;
 
     @PostMapping
-    public ResponseEntity<Long> cretaeCustomer(
+    public ResponseEntity<Long> createCustomer(
        @RequestBody @Valid CustomerRequest request
     ){
         return ResponseEntity.ok(service.createCustomer(request));
@@ -46,11 +46,11 @@ public class CustomerController {
     public ResponseEntity<List<CustomerResponse>> findAll(){
         return ResponseEntity.ok(service.findAllCustomers());
     }
-    @GetMapping("/exits/{customer-id}")
-    public ResponseEntity<Boolean> existById(
+    @GetMapping("/exists/{customer-id}")
+    public ResponseEntity<Boolean> existsById(
         @PathVariable("customer-id") Long customerId
     ){
-       return ResponseEntity.ok(service.existById(customerId));
+       return ResponseEntity.ok(service.existsById(customerId));
     }
     @GetMapping("/{customer-id}")
     public ResponseEntity<CustomerResponse> findById(

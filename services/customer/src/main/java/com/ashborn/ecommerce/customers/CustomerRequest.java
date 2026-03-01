@@ -6,9 +6,9 @@ import jakarta.validation.constraints.NotNull;
 public record CustomerRequest(
         Long id,
         @NotNull(message="Customer firstname is required")
-        String firstname,
+        String firstName,
         @NotNull(message="Customer lastname is required")
-        String lastname,
+        String lastName,
         @NotNull(message="Customer email is required")
         @Email(message= "Customer email is not a valid email")
         String email,
