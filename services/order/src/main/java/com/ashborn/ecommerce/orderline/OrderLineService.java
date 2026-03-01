@@ -1,5 +1,8 @@
 package com.ashborn.ecommerce.orderline;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -13,5 +16,11 @@ public class OrderLineService {
     var order=mapper.toOrderLine(request);
     return repository.save(order).getId();
 
+   }
+   public List<OrderLineResponse> findAllByOrderId(Integer orderId) {
+    return repository.findByOrderId(orderId)
+                     .stream() 
+                     .map(mapper::toOrderLineResponse)
+                     .collect(Collectors.toList());
    }
 }
