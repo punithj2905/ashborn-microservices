@@ -28,7 +28,6 @@ import lombok.Setter;
 @Table(name = "notification")
 public class Notification {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     @Enumerated(EnumType.STRING)
     private NotificationType type;

@@ -41,9 +41,7 @@ public class ProductController {
         return ResponseEntity.ok(service.findById(productId));
     }
     @GetMapping
-    public ResponseEntity<List<ProductResponse>> findAll(
-        @RequestBody List<ProductPurchaseRequest> request
-    ){
+    public ResponseEntity<List<ProductResponse>> findAll(){
         return ResponseEntity.ok(service.findAll());
     }
     

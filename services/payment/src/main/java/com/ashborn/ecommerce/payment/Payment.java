@@ -42,7 +42,7 @@ public class Payment {
     private Integer orderId;
     @CreatedDate
     @Column(updatable = false,nullable=false)
-    private LocalDateTime cretaedDate;
+    private LocalDateTime createdDate;
      @LastModifiedDate
     @Column(insertable = false)
     private LocalDateTime lastModifiedDate;

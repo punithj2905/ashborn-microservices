@@ -7,7 +7,7 @@ import com.ashborn.ecommerce.payment.PaymentMethod;
 public record PaymentNotificationRequest(
     String orderReference,
     BigDecimal amount,
-    PaymentMethod paymnetMethod,
+    PaymentMethod paymentMethod,
     String customerFirstName,
     String customerLastName,
     String customerEmail

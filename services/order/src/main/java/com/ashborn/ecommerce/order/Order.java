@@ -45,7 +45,7 @@ public class Order {
     private List<OrderLine> orderLines;
     @CreatedDate
     @Column(updatable = false,nullable=false)
-    private LocalDateTime cretaedDate;
+    private LocalDateTime createdDate;
      @LastModifiedDate
     @Column(insertable = false)
     private LocalDateTime lastModifiedDate;

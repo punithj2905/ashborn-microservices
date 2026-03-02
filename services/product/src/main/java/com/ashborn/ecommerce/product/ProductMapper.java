@@ -1,12 +1,11 @@
 package com.ashborn.ecommerce.product;
 
-import org.springframework.stereotype.Repository;
-
+import org.springframework.stereotype.Service;
 import com.ashborn.ecommerce.category.Category;
 
-import jakarta.validation.constraints.NotNull;
 
-@Repository
+
+@Service
 public class ProductMapper {
 
     public Product toProduct(ProductRequest request) {

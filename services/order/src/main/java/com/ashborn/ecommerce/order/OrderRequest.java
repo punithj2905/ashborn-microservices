@@ -17,8 +17,6 @@ public record OrderRequest(
     BigDecimal amount,
     @NotNull(message = "Payment method should be precised")
     PaymentMethod paymentMethod,
-    @NotNull(message = "customer should be present")
-    @NotEmpty(message = "customer should be present")
     @NotBlank(message = "customer should be present")
     String customerId,
     @NotEmpty(message = "You should atleast purchase one product")

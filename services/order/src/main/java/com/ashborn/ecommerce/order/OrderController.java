@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class OrderController {
     private final OrderService service;
     @PostMapping
-    public ResponseEntity<Integer> createOdrer(
+    public ResponseEntity<Integer> createOrder(
         @RequestBody @Valid OrderRequest request
     ){
        return ResponseEntity.ok(service.createOrder(request));

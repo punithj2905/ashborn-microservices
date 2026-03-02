@@ -1,6 +1,7 @@
 package com.ashborn.ecommerce.kafka;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
@@ -22,17 +23,17 @@ import lombok.extern.slf4j.Slf4j;
 public class NotificationConsumer {
     private final NotificationRepository repository;
     private final EmailService emailService;
-
+     
     @KafkaListener(topics="payment-topic")
     public void consumePaymentSuccessNotification(PaymentConfirmation paymentConfirmation) throws MessagingException{
          log.info(String.format("Consuming the message from payment-topic:: %s", paymentConfirmation));
-         repository.save(
-            Notification.builder()
-            .type(NotificationType.PAYMENT_CONFIRMATION)
-            .notificationDate(LocalDateTime.now())
-            .paymentConfirmation(paymentConfirmation)
-            .build()
-         );
+         Notification notification = Notification.builder()
+        .id(UUID.randomUUID().toString())
+        .type(NotificationType.PAYMENT_CONFIRMATION)
+        .notificationDate(LocalDateTime.now())
+        .paymentConfirmation(paymentConfirmation)
+        .build();
+         repository.save(notification);
         //send email
         var customerName = paymentConfirmation.customerFirstName()+" "+paymentConfirmation.customerLastName();
         emailService.sendPaymentSuccessEmail(
@@ -46,13 +47,13 @@ public class NotificationConsumer {
     @KafkaListener(topics="order-topic")
     public void consumeOrderConfirmationNotification(OrderConfirmation orderConfirmation) throws MessagingException{
          log.info(String.format("Consuming the message from order-topic:: %s", orderConfirmation));
-         repository.save(
-            Notification.builder()
+         Notification notification=Notification.builder()
+            .id(UUID.randomUUID().toString())
             .type(NotificationType.ORDER_CONFIRMATION)
             .notificationDate(LocalDateTime.now())
             .orderConfirmation(orderConfirmation)
-            .build()
-         );
+            .build();
+         repository.save(notification);
         //send email
         var customerName = orderConfirmation.customer().firstname()+" "+orderConfirmation.customer().lastname();
         emailService.sendOrderConfirmationEmail(
