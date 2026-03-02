@@ -17,6 +17,7 @@ import com.ashborn.ecommerce.product.ProductClient;
 import com.ashborn.ecommerce.product.PurchaseRequest;
 
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
@@ -29,12 +30,12 @@ public class OrderService {
     private final OrderLineService orderLineService;
     private final OrderProducer orderProducer;
     private final PaymentClient paymentClient;
+    @Transactional
     public Integer createOrder(OrderRequest request) {
     //check the customer-->openfeign
     var customer = this.customerClient.findCustomerById(request.customerId())
                        .orElseThrow(()-> new BusinessException("Cannot create order:: No customer exists with the provided Id"));
      
-
 
     //purchase the products --> product-microservice(RestTemplate)
     var purchasedProducts= this.productClient.purchaseProducts(request.products());

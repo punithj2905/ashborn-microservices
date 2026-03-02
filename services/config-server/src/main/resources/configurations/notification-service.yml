@@ -1,0 +1,39 @@
+spring:
+    datasource:
+        url: jdbc:mysql://localhost:3306/ashborn_customer
+        username: shadow123
+        password: shadow123
+        driver-class-name: com.mysql.cj.jdbc.Driver
+
+    jpa:
+        hibernate:
+            ddl-auto: update
+        show-sql: true
+        database-platform: org.hibernate.dialect.MySQL8Dialect
+    kafka:
+        consumer:
+            bootstrap-servers: localhost:9092
+            group-id: paymentGroup,orderGroup
+            auto-offset-reset: earliest
+            key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+            value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+            properties:
+                spring.json.trusted.packages: '*'
+                spring.json.type.mapping: orderConfirmation:com.ashborn.ecommerce.kafka.order.OrderConfirmation,paymentConfirmation:com.ashborn.ecommerce.notification.payment.PaymentNotification
+    mail:
+        host: localhost
+        port: 1025
+        username: shadow
+        password: shadow
+        properties:
+            mail:
+                smtp:
+                    trust: "*"
+                auth: true
+                starttls:
+                    enabled: true
+                connectiontimeout: 5000
+                timeout: 3000
+                writetimeout: 5000
+server:
+  port: 8040

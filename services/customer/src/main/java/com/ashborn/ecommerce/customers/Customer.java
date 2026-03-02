@@ -1,6 +1,8 @@
 package com.ashborn.ecommerce.customers;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
+
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,10 +18,12 @@ import lombok.Setter;
 @Setter
 public class Customer {
      @Id
-    @GeneratedValue
-    private Long id;
+    private String id;
     private String firstName;
     private String lastName;
+    @Column(unique = true)
     private String email;
+    @Embedded
     private Address address;
+   
 }

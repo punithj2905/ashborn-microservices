@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import com.ashborn.ecommerce.notification.NotificationProducer;
 import com.ashborn.ecommerce.notification.PaymentNotificationRequest;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -13,6 +14,7 @@ public class PaymentService {
     private final PaymentRepository repository;
     private final PaymentMapper mapper;
     private final NotificationProducer notificationProducer;
+    @Transactional
     public Integer createPayment(PaymentRequest request){
         var payment=repository.save(mapper.toPayment(request));
         notificationProducer.sendNotification(

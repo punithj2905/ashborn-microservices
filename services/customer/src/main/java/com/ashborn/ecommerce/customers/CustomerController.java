@@ -15,19 +15,19 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 
 
 @RestController
-@RequestMapping("/api/v1/customer")
+@RequestMapping("/api/v1/customers")
 @RequiredArgsConstructor
 public class CustomerController {
     private final CustomerService service;
 
     @PostMapping
-    public ResponseEntity<Long> createCustomer(
+    public ResponseEntity<String> createCustomer(
        @RequestBody @Valid CustomerRequest request
     ){
         return ResponseEntity.ok(service.createCustomer(request));
@@ -48,19 +48,19 @@ public class CustomerController {
     }
     @GetMapping("/exists/{customer-id}")
     public ResponseEntity<Boolean> existsById(
-        @PathVariable("customer-id") Long customerId
+        @PathVariable("customer-id") String customerId
     ){
        return ResponseEntity.ok(service.existsById(customerId));
     }
     @GetMapping("/{customer-id}")
     public ResponseEntity<CustomerResponse> findById(
-        @PathVariable("customer-id") Long customerId
+        @PathVariable("customer-id") String customerId
     ){
        return ResponseEntity.ok(service.findById(customerId));
     }
     @DeleteMapping("/{customer-id}")
     public ResponseEntity<Void> deleteById(
-         @PathVariable("customer-id") Long customerId
+         @PathVariable("customer-id") String customerId
     ){
         service.deleteCustomer(customerId);
         return ResponseEntity.accepted().build();

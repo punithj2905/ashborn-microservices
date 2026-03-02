@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Order Confirmation</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#eef2f7;
+    padding:40px;
+}
+
+.container{
+    max-width:650px;
+    margin:auto;
+    background:white;
+    padding:40px;
+    border-radius:16px;
+    box-shadow:0 6px 25px rgba(0,0,0,0.05);
+}
+
+.header{
+    text-align:center;
+    border-bottom:1px solid #ececec;
+    padding-bottom:22px;
+    margin-bottom:30px;
+}
+
+.title{
+    font-size:24px;
+    font-weight:600;
+    color:#1f2937;
+}
+
+.highlight{
+    color:#2563eb;
+    font-weight:600;
+}
+
+.product-item{
+    padding:12px 0;
+    border-bottom:1px solid #f1f5f1;
+}
+
+.footer{
+    margin-top:40px;
+    padding-top:25px;
+    border-top:1px solid #f1f5f9;
+    text-align:center;
+    font-size:13px;
+    color:#9ca3af;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+<div class="title">🛒 Order Confirmation</div>
+</div>
+
+<p>Dear <strong th:text="${customerName}"></strong>,</p>
+
+<p>
+Your order with reference
+<strong th:text="${orderReference}"></strong>
+has been successfully placed.
+</p>
+
+<h3>📦 Order Summary</h3>
+
+<div th:each="product : ${products}" class="product-item">
+<p>
+<span th:text="${product.name}"></span>
+-
+Qty: <span th:text="${product.quantity}"></span>
+</p>
+</div>
+
+<p>
+Total Amount:
+<span class="highlight" th:text="${totalAmount}"></span>
+</p>
+
+<div class="footer">
+<p>This is a system generated email. Please do not reply.</p>
+<p>Ashborn Ecommerce Platform Backend Service</p>
+</div>
+
+</div>
+
+</body>
+</html>
