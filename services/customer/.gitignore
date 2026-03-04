@@ -31,3 +31,17 @@ build/
 
 ### VS Code ###
 .vscode/
+# Environment secrets
+.env
+application-secret.yml
+application-local.yml
+
+# Spring Boot sensitive config
+**/application.yml
+**/application.properties
+
+# Logs
+*.log
+
+# Compiled outputs
+*.class

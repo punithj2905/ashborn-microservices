@@ -31,21 +31,28 @@ services:
       - microservices-net
     restart: unless-stopped
 
-  # mysql:
-  #   container_name: ms_mysql_db
-  #   image: mysql:8
-  #   environment:
-  #     MYSQL_ROOT_PASSWORD: shadow
-  #     MYSQL_DATABASE: ashborn_db
-  #     MYSQL_USER: shadow
-  #     MYSQL_PASSWORD: shadow
-  #   volumes:
-  #     - mysql:/var/lib/mysql
-  #   ports:
-  #     - "3306:3306"
-  #   networks:
-  #     - microservices-net
-  #   restart: unless-stopped
+  mysql:
+    container_name: ms_mysql_db
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: shadow123
+      MYSQL_DATABASE: ashborn_customer
+      MYSQL_USER: shadow123
+      MYSQL_PASSWORD: shadow123
+    volumes:
+      - mysql:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - microservices-net
+    restart: unless-stopped
+  adminer:
+    image: adminer
+    ports:
+      - "8081:8080"
+    networks:
+      - microservices-net
+    restart: unless-stopped
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
     container_name: zookeeper
