@@ -12,9 +12,6 @@ import jakarta.validation.constraints.Positive;
 
 public record OrderRequest(
     Integer id,
-    String reference,
-    @Positive(message = "Order amount should be positive")
-    BigDecimal amount,
     @NotNull(message = "Payment method should be precised")
     PaymentMethod paymentMethod,
     @NotBlank(message = "customer should be present")

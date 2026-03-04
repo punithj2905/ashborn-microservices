@@ -18,7 +18,7 @@ spring:
             bootstrap-servers: localhost:9092
             key-serializer: org.apache.kafka.common.serialization.StringSerializer
             value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-            properties:
-                spring.json.type.mapping: paymentConfirmation:com.ashborn.ecommerce.notification.PaymentNotificationRequest
-sever:
+            # properties:
+            #     spring.json.type.mapping: paymentConfirmation:com.ashborn.ecommerce.notification.PaymentNotificationRequest
+server:
   port: 8060

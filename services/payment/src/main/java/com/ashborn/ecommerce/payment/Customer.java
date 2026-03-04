@@ -8,8 +8,8 @@ import jakarta.validation.constraints.NotNull;
 @Validated
 public record Customer(
         String id,
-        @NotNull(message = "Customer firstname is required") String firstname,
-        @NotNull(message = "Customer lastname is required") String lastname,
+        @NotNull(message = "Customer firstname is required") String firstName,
+        @NotNull(message = "Customer lastname is required") String lastName,
         @NotNull(message = "Customer email is required") @Email(message = "Customer email is not a valid email") String email) {
 
 }

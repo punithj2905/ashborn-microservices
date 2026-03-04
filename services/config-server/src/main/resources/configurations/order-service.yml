@@ -14,12 +14,12 @@ spring:
             bootstrap-servers: localhost:9092
             key-serializer: org.apache.kafka.common.serialization.StringSerializer
             value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-            properties:
-                spring.json.type.mapping: orderConfirmation:com.ashborn.ecommerce.kafka.OrderConfirmation
+            # properties:
+            #     spring.json.type.mapping: orderConfirmation:com.ashborn.ecommerce.kafka.order.OrderConfirmation
 server:
     port: 8070
-application:
-    config:
-        customer-url:http:??localhost:8090/api/v1/customers
-        product-url:http:??localhost:8050/api/v1/products
-        payment-url:http:??localhost:8060/api/v1/payments
+services:
+    customer: http://localhost:8090/api/v1/customers
+    product: http://localhost:8050/api/v1/products
+    payment: http://localhost:8060/api/v1/payments
+    

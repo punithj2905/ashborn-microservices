@@ -1,4 +1,4 @@
-package com.ashborn.ecommerce.kafka;
+package com.ashborn.ecommerce.kafka.order;
 
 import java.math.BigDecimal;
 import java.util.List;

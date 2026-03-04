@@ -1,17 +1,26 @@
 package com.ashborn.ecommerce.kafka.payment;
 
-import java.math.BigDecimal;
 
 import jakarta.persistence.Embeddable;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import java.math.BigDecimal;
 
 @Embeddable
-public record PaymentConfirmation(
-    String orderReference,
-    BigDecimal amount,
-    PaymentMethod paymentMethod,
-    String customerFirstName,
-    String customerLastName,
-    String customerEmail
-) {
-    
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class PaymentConfirmation {
+
+    private String orderReference;
+    private BigDecimal amount;
+    private PaymentMethod paymentMethod;
+    private String customerFirstName;
+    private String customerLastName;
+    private String customerEmail;
 }

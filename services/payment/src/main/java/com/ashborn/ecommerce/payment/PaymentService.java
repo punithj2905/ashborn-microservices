@@ -2,14 +2,16 @@ package com.ashborn.ecommerce.payment;
 
 import org.springframework.stereotype.Service;
 
+import com.ashborn.ecommerce.kafka.payment.PaymentConfirmation;
 import com.ashborn.ecommerce.notification.NotificationProducer;
-import com.ashborn.ecommerce.notification.PaymentNotificationRequest;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class PaymentService {
     private final PaymentRepository repository;
     private final PaymentMapper mapper;
@@ -17,13 +19,14 @@ public class PaymentService {
     @Transactional
     public Integer createPayment(PaymentRequest request){
         var payment=repository.save(mapper.toPayment(request));
+        log.info("Payment request payload: {}", request);
         notificationProducer.sendNotification(
-            new PaymentNotificationRequest(
+            new PaymentConfirmation(
                 request.orderReference(),
-                request.amount(),
+                payment.getAmount(),
                 request.paymentMethod(),
-                request.customer().firstname(),
-                request.customer().lastname(),
+                request.customer().firstName(),
+                request.customer().lastName(),
                 request.customer().email()
             )
         );

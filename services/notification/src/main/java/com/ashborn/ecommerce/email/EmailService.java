@@ -1,8 +1,5 @@
 package com.ashborn.ecommerce.email;
 
-import static com.ashborn.ecommerce.email.EmailTemplates.ORDER_CONFIRMATION;
-import static com.ashborn.ecommerce.email.EmailTemplates.PAYMENT_CONFIRMATION;
-
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
@@ -16,6 +13,8 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 
+import static com.ashborn.ecommerce.email.EmailTemplates.ORDER_CONFIRMATION;
+import static com.ashborn.ecommerce.email.EmailTemplates.PAYMENT_CONFIRMATION;
 import com.ashborn.ecommerce.kafka.order.Product;
 
 import jakarta.mail.MessagingException;

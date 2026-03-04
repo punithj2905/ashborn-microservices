@@ -1,15 +1,17 @@
 package com.ashborn.ecommerce.order;
 
+import java.math.BigDecimal;
+import java.util.UUID;
+
 import org.springframework.stereotype.Service;
 
 @Service
 public class OrderMapper {
-       public Order toOrder(OrderRequest request){
+       public Order toOrder(OrderRequest request, String customerId, BigDecimal totalAmount){
         return  Order.builder()
-                   .id(request.id())
                    .customerId(request.customerId())
-                   .reference(request.reference())
-                   .totalAmount(request.amount())
+                   .reference(UUID.randomUUID().toString())
+                   .totalAmount(totalAmount)
                    .paymentMethod(request.paymentMethod())        
                    .build();
        }

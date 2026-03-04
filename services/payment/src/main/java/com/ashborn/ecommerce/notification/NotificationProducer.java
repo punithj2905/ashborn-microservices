@@ -1,11 +1,13 @@
 package com.ashborn.ecommerce.notification;
 
 
-import org.springframework.messaging.Message;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.KafkaHeaders;
+import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
+
+import com.ashborn.ecommerce.kafka.payment.PaymentConfirmation;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,10 +16,10 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Slf4j
 public class NotificationProducer {
-    private final KafkaTemplate<String, PaymentNotificationRequest> kafkaTemplate;
-    public void sendNotification(PaymentNotificationRequest request){
+    private final KafkaTemplate<String, PaymentConfirmation> kafkaTemplate;
+    public void sendNotification(PaymentConfirmation request){
         log.info("Sending notification with body <{}>",request);
-        Message<PaymentNotificationRequest> message= MessageBuilder
+        Message<PaymentConfirmation> message= MessageBuilder
                                                     .withPayload(request)
                                                     .setHeader(KafkaHeaders.TOPIC, "payment-topic")
                                                     .build();

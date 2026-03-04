@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @FeignClient(
     name="payment-service",
-    url="${application.config.payment.url}"
+    url="${services.payment}"
 )
 public interface PaymentClient {
     @PostMapping
